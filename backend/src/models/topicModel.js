@@ -4,9 +4,10 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const topicSchema = mongoose.Schema({
     userId: {
         type: ObjectId,
-        required: true
+        required: true,
+        ref: 'User'
     },
-    title: {
+    topic: {
         type: String,
         required: true
     },
