@@ -20,7 +20,7 @@ const userSignIn = async (req, res) => {
 
         //----------------------------- Validating body -----------------------------//
         if (Object.keys(userData).length === 0) {
-            return res.status(400).send({ status: false, msg: "Request Cannot Be Empty" })
+            return res.status(400).send({ status: false, message: "Request Cannot Be Empty" })
         }
 
         //----------------------------- Validating userName -----------------------------//
@@ -44,7 +44,7 @@ const userSignIn = async (req, res) => {
         }
 
         const userCreated = await userModel.create(userData);
-        return res.status(201).send({ status: true, message: 'User Created Successfully', data: userCreated });
+        return res.status(201).send({ status: true, message: 'Registration Successfull', data: userCreated });
     }
     catch (error) {
         return res.status(500).send({ status: false, message: error.message });
@@ -93,7 +93,7 @@ const userLogin = async function (req, res) {
             project: "feynman-board",
         }, "doneByAnil")
 
-        res.setHeader("x-api-key", token);
+        res.setHeader("Authorization", token);
         const output = {
             userId: user._id,
             token: token

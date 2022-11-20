@@ -8,18 +8,16 @@ const userModel = require('../models/userModel');
 
 const authentication = async function (req, res, next) {
     try {
-        let token = req.headers["x-Api-Key"];
-        if (!token) {
-          token = req.headers["x-api-key"];
-        }
+        let token = req.header("Authorization");
+
         //If no token is present in the request header return error
         if (!token) {
-          return res.status(400).send({ status: false, msg: "login is required" });
+            return res.status(400).send({ status: false, message: "login is required" });
         }
-    
+
         let decodedToken = jwt.verify(token, "doneByAnil");
         if (!decodedToken) {
-          return res.status(401).send({ status: false, msg: "token is invalid" });
+            return res.status(401).send({ status: false, message: "token is invalid" });
         }
         req.token = decodedToken.userId;
         next();

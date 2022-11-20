@@ -49,9 +49,6 @@ let addTopic = async (req, res) => {
 let dashboard = async (req, res) => {
     try {
         const topic = await topicModel.find({ userId: req.params.userId })
-        if (topic.length === 0) {
-            return res.status(404).send({ status: false, msg: "No topic Found" });
-        }
         return res.status(200).send({ status: true, message: "Topic details: ", data: topic });
     }
     catch (error) {
